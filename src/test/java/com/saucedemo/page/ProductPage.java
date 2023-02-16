@@ -18,6 +18,7 @@ public class ProductPage extends BasePage {
     private static final String ADD_TO_CART_BTN_ELEMENT = "//div[text()='%s']/ancestor::div[@class='inventory_item']" +
     "//button[text()='Add to cart']";
     private static final String SHOPPING_CART_BTN_ELEMENT = "//a[@class='shopping_cart_link']";
+
     public ProductPage(WebDriver driver) {
         super(driver);
     }

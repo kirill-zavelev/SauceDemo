@@ -22,7 +22,7 @@ public class CartTest extends BaseTest {
         Assert.assertEquals(cartPage.getProductName(), productName,
                 "Name of product should be " + productName);
         Assert.assertEquals(cartPage.getProductPrice(productName), expectedPrice,
-                "Name of product should be " + expectedPrice);
+                "Price of product should be " + expectedPrice);
     }
 
     @Test

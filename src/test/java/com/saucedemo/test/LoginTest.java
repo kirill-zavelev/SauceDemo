@@ -34,5 +34,4 @@ public class LoginTest extends BaseTest {
                 {"", "secret_sauce", "Epic sadface: Username is required"},
         };
     }
-
 }
