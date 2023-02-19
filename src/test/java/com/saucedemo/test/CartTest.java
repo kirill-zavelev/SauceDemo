@@ -1,10 +1,10 @@
 package com.saucedemo.test;
 
-import com.saucedemo.base.BaseTest;
 import com.saucedemo.page.CartPage;
 import com.saucedemo.page.LoginPage;
-import com.saucedemo.page.ProductPage;
-import org.testng.Assert;
+import com.saucedemo.page.ProductsPage;
+import org.assertj.core.api.Assertions;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -14,46 +14,60 @@ public class CartTest extends BaseTest {
     @Test
     public void checkProductIsAddedToCart() {
         final String productName = "Sauce Labs Backpack";
-        loginToTheApplication();
-        ProductPage productPage = new ProductPage(getDriver());
-        String expectedPrice = productPage.getProductPrice(productName);
-        productPage.addProductToCart(productName);
-        CartPage cartPage = new CartPage(getDriver());
-        Assert.assertEquals(cartPage.getProductName(), productName,
-                "Name of product should be " + productName);
-        Assert.assertEquals(cartPage.getProductPrice(productName), expectedPrice,
-                "Price of product should be " + expectedPrice);
+        String expectedProductPrice = new LoginPage(getDriver())
+                .loginAsStandardUser()
+                .getProductPrice(productName);
+        CartPage cartPage = new ProductsPage(getDriver())
+                .addProductToCart(productName)
+                .openProductCart();
+        Assertions.assertThat(cartPage.getProductPrice(productName))
+                .isEqualTo(expectedProductPrice)
+                .as("Price should be " + expectedProductPrice);
     }
 
     @Test
     public void checkProductsAreAddedToCart() {
-        loginToTheApplication();
-        ProductPage productPage = new ProductPage(getDriver());
-        List<String> products = List.of("Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt", "Sauce Labs Fleece Jacket");
-        List<String> expectedProductPrices = productPage.getProductsPrices(products);
-        productPage.addProductsToCart(products);
-        CartPage cartPage = new CartPage(getDriver());
-        Assert.assertEquals(cartPage.getProductsPrices(products), expectedProductPrices,
-                "Prices of the products are not equal");
-        Assert.assertEquals(cartPage.getAllProductNames(), products,
-                "Names of the products are not equal");
+        final List<String> products = List.of("Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt",
+                "Sauce Labs Fleece Jacket");
+        List<String> expectedProductsPrices = new LoginPage(getDriver())
+                .loginAsStandardUser()
+                .getProductsPrices(products);
+        CartPage cartPage = new ProductsPage(getDriver())
+                .addProductsToCart(products)
+                .openProductCart();
+        Assertions.assertThat(cartPage.getProductsPrices(products))
+                .isEqualTo(expectedProductsPrices)
+                .as("Products in cart should have the following prices: " + expectedProductsPrices);
     }
 
     @Test
-    public void checkRemoveProductFromCart() {
-        loginToTheApplication();
-        ProductPage productPage = new ProductPage(getDriver());
-        List<String> products = List.of("Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt", "Sauce Labs Fleece Jacket");
-        productPage.addProductsToCart(products);
-        CartPage cartPage = new CartPage(getDriver());
-        cartPage.removeProductFromCart("Sauce Labs Bike Light");
-        List<String> expectedProductsAfterRemove = List.of("Sauce Labs Bolt T-Shirt", "Sauce Labs Fleece Jacket");
-        Assert.assertEquals(cartPage.getAllProductNames(), expectedProductsAfterRemove,
-                "Some product was not deleted");
+    public void checkRemoveProductsFromCart() {
+        final List<String> products = List.of("Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt",
+                "Sauce Labs Fleece Jacket");
+        final List<String> expectedProductsAfterRemove = List.of("Sauce Labs Bolt T-Shirt",
+                "Sauce Labs Fleece Jacket");
+        List<String> actualProductsAfterRemove = new LoginPage(getDriver())
+                .loginAsStandardUser()
+                .addProductsToCart(products)
+                .openProductCart()
+                .removeProductFromCart("Sauce Labs Bike Light")
+                .getAllProductsNames();
+        Assertions.assertThat(actualProductsAfterRemove)
+                .isNotNull()
+                .isEqualTo(expectedProductsAfterRemove)
+                .as("Product 'Sauce Labs Bike Light' was not removed");
     }
 
-    private void loginToTheApplication() {
-        LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.login("standard_user", "secret_sauce");
+    @Test
+    public void checkContinueShopping() {
+        final int expectedProductsAmount = 6;
+        List<WebElement> productsAtProductsPage = new LoginPage(getDriver())
+                .loginAsStandardUser()
+                .openProductCart()
+                .clickContinueShopping()
+                .getAllProducts();
+        Assertions.assertThat(productsAtProductsPage.size())
+                .isEqualTo(expectedProductsAmount)
+                .as("Product page should contain " + expectedProductsAmount);
     }
 }
