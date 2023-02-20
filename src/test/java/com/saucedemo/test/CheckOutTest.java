@@ -43,8 +43,8 @@ public class CheckOutTest extends BaseTest {
         checkOutYourInformationPage.clickContinue();
         String actualErrorText = checkOutYourInformationPage.getErrorText();
         Assertions.assertThat(actualErrorText)
-                .isEqualTo(errorMessage)
-                .as("Title text should be " + errorMessage);
+                .as("Title text should be " + errorMessage)
+                .isEqualTo(errorMessage);
     }
 
     @Test
@@ -59,8 +59,8 @@ public class CheckOutTest extends BaseTest {
                 .clickCancel()
                 .getTitle();
         Assertions.assertThat(actualTitle)
-                .isEqualTo(expectedTitle)
-                .as("Title should be " + expectedTitle);
+                .as("Title should be " + expectedTitle)
+                .isEqualTo(expectedTitle);
     }
 
     @Test
@@ -76,8 +76,8 @@ public class CheckOutTest extends BaseTest {
         checkOutYourInformationPage.clickContinue();
         CheckOutOverviewPage checkOutOverviewPage = new CheckOutOverviewPage(getDriver());
         Assertions.assertThat(checkOutOverviewPage.clickCancel().getTitle())
-                .isEqualTo(expectedTitle)
-                .as("Title should be " + expectedTitle);
+                .as("Title should be " + expectedTitle)
+                .isEqualTo(expectedTitle);
     }
 
     @Test
@@ -96,11 +96,11 @@ public class CheckOutTest extends BaseTest {
         List<String> actualProductsNames = checkOutOverviewPage.getAllProductsNames();
         List<String> actualProductsPrices = checkOutOverviewPage.getAllProductsPrices();
         Assertions.assertThat(actualProductsPrices)
-                .isEqualTo(expectedProductsPrices)
-                .as("Prices should be " + expectedProductsPrices);
+                .as("Prices should be " + expectedProductsPrices)
+                .isEqualTo(expectedProductsPrices);
         Assertions.assertThat(actualProductsNames)
-                .isEqualTo(expectedProductsNames)
-                .as("Names should be " + expectedProductsNames);
+                .as("Names should be " + expectedProductsNames)
+                .isEqualTo(expectedProductsNames);
     }
 
     @DataProvider(name = "dataProviderForCheckOutForm")

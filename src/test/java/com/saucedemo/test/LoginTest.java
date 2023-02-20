@@ -14,8 +14,8 @@ public class LoginTest extends BaseTest {
                 .open()
                 .loginAsStandardUser();
         Assertions.assertThat(productsPage.isLogoutButtonDisplayed())
-                .isTrue()
-                .as("Logout btn should be displayed after successful login");
+                .as("Logout btn should be displayed after successful login")
+                .isTrue();
     }
 
     @Test(dataProvider = "unsuccessfulLoginDataProvider")
@@ -23,8 +23,8 @@ public class LoginTest extends BaseTest {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.loginAs(login, pass);
         Assertions.assertThat(loginPage.getUnsuccessfulLoginMessage())
-                .isEqualTo(expectedMessage)
-                .as("Message: " + expectedMessage + " should be displayed");
+                .as("Message: " + expectedMessage + " should be displayed")
+                .isEqualTo(expectedMessage);
     }
 
     @DataProvider(name = "unsuccessfulLoginDataProvider")

@@ -28,8 +28,9 @@ public class CheckOutYourInformationPage extends BasePage {
         return new CartPage(driver);
     }
 
-    public void clickContinue() {
+    public CheckOutOverviewPage clickContinue() {
         driver.findElement(CONTINUE_BTN).click();
+        return new CheckOutOverviewPage(driver);
     }
 
     public String getErrorText() {

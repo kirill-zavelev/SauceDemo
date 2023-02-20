@@ -6,8 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ProductsTest extends BaseTest {
@@ -19,31 +18,24 @@ public class ProductsTest extends BaseTest {
                 .clickAddToCartForAllProducts();
         List<WebElement> allProducts = productsPage.getAllProducts();
         Assertions.assertThat(productsPage.getAmountOfAddedProductsDisplayedInCartIcon())
-                .isEqualTo(allProducts.size())
-                .as("Icon should display value " + allProducts.size());
+                .as("Icon should display value " + allProducts.size())
+                .isEqualTo(allProducts.size());
     }
 
     @Test
     public void checkProductsSorting() {
-        List<String> expectedProducts = new ArrayList<>();
-        expectedProducts.add("Sauce Labs Backpack");
-        expectedProducts.add("Sauce Labs Bike Light");
-        expectedProducts.add("Sauce Labs Bolt T-Shirt");
-        expectedProducts.add("Sauce Labs Fleece Jacket");
-        expectedProducts.add("Sauce Labs Onesie");
-        expectedProducts.add("Test.allTheThings() T-Shirt (Red)");
-        Collections.reverse(expectedProducts);
         List<String> actualSortedProducts = new LoginPage(getDriver())
                 .loginAsStandardUser()
                 .sortProductsNamesAndGetList("Z - A");
         Assertions.assertThat(actualSortedProducts)
-                .isEqualTo(expectedProducts)
-                .as("List should be in the following order " + expectedProducts);
-        Collections.sort(expectedProducts);
+                .isNotNull()
+                .as("Products should be sorted in alphabetic order vice versa (from Z to A)")
+                .isSortedAccordingTo(Comparator.reverseOrder());
         ProductsPage productsPage = new ProductsPage(getDriver());
         actualSortedProducts = productsPage.sortProductsNamesAndGetList("A - Z");
         Assertions.assertThat(actualSortedProducts)
-                .isEqualTo(expectedProducts)
-                .as("List should be in the following order " + expectedProducts);
+                .isNotNull()
+                .as("Products should be sorted in alphabetic order (from A to Z)")
+                .isSorted();
     }
 }

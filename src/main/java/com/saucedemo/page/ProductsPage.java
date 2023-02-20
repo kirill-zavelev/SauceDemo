@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +15,6 @@ public class ProductsPage extends BasePage {
     private final By SHOPPING_CART_BTN_ELEMENT = By.xpath("//a[@class='shopping_cart_link']");
     private final By TITLE_ELEMENT = By.xpath("//span[@class='title']");
     private final By SORT_DROPDOWN = By.xpath("//select[@class='product_sort_container']");
-    private final By SORT_OPTION_A_TO_Z = By.xpath("//option[text()='Name (A to Z)']");
-    private final By SORT_OPTION_Z_TO_A = By.xpath("//option[text()='Name (Z to A)']");
     private final By INVENTORY_ITEM_NAMES = By.xpath("//div[@class='inventory_item_name']");
     private final By LOGOUT_LINK = By.id("logout_sidebar_link");
     private final By EXPAND_LEFT_SIDE_MENU = By.id("react-burger-menu-btn");
@@ -25,6 +24,8 @@ public class ProductsPage extends BasePage {
             "//div[@class='inventory_item_price']";
     private static final String ADD_TO_CART_BTN_ELEMENT = "//div[text()='%s']/ancestor::div[@class='inventory_item']" +
             "//button[text()='Add to cart']";
+    private static final String SORT_OPTION_A_TO_Z = "Name (A to Z)";
+    private static final String SORT_OPTION_Z_TO_A = "Name (Z to A)";
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -103,14 +104,13 @@ public class ProductsPage extends BasePage {
     }
 
     public List<String> sortProductsNamesAndGetList(String sortOption) {
+        Select select = new Select(driver.findElement(SORT_DROPDOWN));
         switch (sortOption) {
             case "A - Z":
-                driver.findElement(SORT_DROPDOWN).click();
-                driver.findElement(SORT_OPTION_A_TO_Z).click();
+                select.selectByVisibleText(SORT_OPTION_A_TO_Z);
                 break;
             case "Z - A":
-                driver.findElement(SORT_DROPDOWN).click();
-                driver.findElement(SORT_OPTION_Z_TO_A).click();
+                select.selectByVisibleText(SORT_OPTION_Z_TO_A);
                 break;
         }
         return driver.findElements(INVENTORY_ITEM_NAMES).stream()

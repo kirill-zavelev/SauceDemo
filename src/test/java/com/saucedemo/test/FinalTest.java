@@ -24,12 +24,12 @@ public class FinalTest extends BaseTest {
         CheckOutOverviewPage checkOutOverviewPage = new CheckOutOverviewPage(getDriver());
         String actualThankYouPageMessage = checkOutOverviewPage.clickFinish().getThankYouMessage();
         Assertions.assertThat(actualThankYouPageMessage)
-                .isEqualTo(expectedThankYouPageMessage)
-                .as("Message should be " + expectedThankYouPageMessage);
+                .as("Message should be " + expectedThankYouPageMessage)
+                .isEqualTo(expectedThankYouPageMessage);
         ThankYouPage thankYouPage = new ThankYouPage(getDriver());
         String actualProductsPageTitle = thankYouPage.clickBackHome().getTitle();
         Assertions.assertThat(actualProductsPageTitle)
-                .isEqualTo(expectedTitleAtProductsPage)
-                .as("Title should be " + expectedTitleAtProductsPage);
+                .as("Title should be " + expectedTitleAtProductsPage)
+                .isEqualTo(expectedTitleAtProductsPage);
     }
 }
