@@ -1,7 +1,6 @@
-package com.saucedemo.test;
-
 import com.saucedemo.page.LoginPage;
 import com.saucedemo.page.ProductsPage;
+import com.saucedemo.page.ProductsSortOption;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -26,13 +25,13 @@ public class ProductsTest extends BaseTest {
     public void checkProductsSorting() {
         List<String> actualSortedProducts = new LoginPage(getDriver())
                 .loginAsStandardUser()
-                .sortProductsNamesAndGetList("Z - A");
+                .sortProductsNamesAndGetList(ProductsSortOption.NameZtoA);
         Assertions.assertThat(actualSortedProducts)
                 .isNotNull()
                 .as("Products should be sorted in alphabetic order vice versa (from Z to A)")
                 .isSortedAccordingTo(Comparator.reverseOrder());
         ProductsPage productsPage = new ProductsPage(getDriver());
-        actualSortedProducts = productsPage.sortProductsNamesAndGetList("A - Z");
+        actualSortedProducts = productsPage.sortProductsNamesAndGetList(ProductsSortOption.NameAtoZ);
         Assertions.assertThat(actualSortedProducts)
                 .isNotNull()
                 .as("Products should be sorted in alphabetic order (from A to Z)")
