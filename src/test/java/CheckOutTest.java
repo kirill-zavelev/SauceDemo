@@ -1,5 +1,3 @@
-package com.saucedemo.test;
-
 import com.saucedemo.page.CartPage;
 import com.saucedemo.page.CheckOutOverviewPage;
 import com.saucedemo.page.CheckOutYourInformationPage;

@@ -24,8 +24,6 @@ public class ProductsPage extends BasePage {
             "//div[@class='inventory_item_price']";
     private static final String ADD_TO_CART_BTN_ELEMENT = "//div[text()='%s']/ancestor::div[@class='inventory_item']" +
             "//button[text()='Add to cart']";
-    private static final String SORT_OPTION_A_TO_Z = "Name (A to Z)";
-    private static final String SORT_OPTION_Z_TO_A = "Name (Z to A)";
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -103,16 +101,9 @@ public class ProductsPage extends BasePage {
         return new LeftSideMenu(driver);
     }
 
-    public List<String> sortProductsNamesAndGetList(String sortOption) {
+    public List<String> sortProductsNamesAndGetList(ProductsSortOption sortOption) {
         Select select = new Select(driver.findElement(SORT_DROPDOWN));
-        switch (sortOption) {
-            case "A - Z":
-                select.selectByVisibleText(SORT_OPTION_A_TO_Z);
-                break;
-            case "Z - A":
-                select.selectByVisibleText(SORT_OPTION_Z_TO_A);
-                break;
-        }
+        select.selectByVisibleText(sortOption.getOption());
         return driver.findElements(INVENTORY_ITEM_NAMES).stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());

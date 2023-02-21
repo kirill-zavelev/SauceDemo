@@ -1,5 +1,3 @@
-package com.saucedemo.test;
-
 import com.saucedemo.page.LoginPage;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
