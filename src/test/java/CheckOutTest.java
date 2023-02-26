@@ -12,7 +12,7 @@ public class CheckOutTest extends BaseTest {
 
     @Test
     public void checkCheckoutFormWithValidData() {
-        final String product = "Sauce Labs Onesie";
+        String product = getProductOrDefault(System.getProperty("product"));
         final String expectedTitle = "CHECKOUT: OVERVIEW";
         CheckOutYourInformationPage checkOutYourInformationPage = new LoginPage(getDriver())
                 .loginAsStandardUser()
@@ -108,5 +108,14 @@ public class CheckOutTest extends BaseTest {
                 {"SomeFirstName", "", "12345", "Error: Last Name is required"},
                 {"SomeFirstName", "SomeLastName", "", "Error: Postal Code is required"}
         };
+    }
+
+    private String getProductOrDefault(String product) {
+        if (product != null) {
+            product = System.getProperty("product");
+        } else {
+            product = "Sauce Labs Bolt T-Shirt";
+        }
+        return product;
     }
 }
