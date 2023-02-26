@@ -1,5 +1,83 @@
 <h1>This is project for SauceDemo automation tests</h1>
 
+<h2>Maven commands</h2>
+<ol type="1">
+   <li>Check available updates of libraries</li>
+    <ul>
+        <li><b>Command:</b> "mvn versions:display-dependency-updates"</li>
+        <li><b>Output:</b> [INFO] The following dependencies in Dependencies have newer versions:
+[INFO]   org.seleniumhq.selenium:selenium-java ................. 4.8.0 -> 4.8.1
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.904 s
+[INFO] Finished at: 2023-02-26T10:41:03+03:00
+[INFO] ------------------------------------------------------------------------</li>
+    </ul>
+    <li>Update all of the libraries
+        <ul>
+            <li><b>Command:</b> "mvn versions:display-dependency-updates"</li>
+            <li><b>Output:</b> [INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.965 s
+[INFO] Finished at: 2023-02-26T10:46:56+03:00
+[INFO] ------------------------------------------------------------------------
+        </ul>
+    </li>
+    <li>Run all of the tests
+        <ul>
+            <li><b>Command:</b> "mvn clean test"</li>
+            <li><b>Output:</b> [INFO] Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 35.407 s - in TestSuite
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 21, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  43.003 s
+[INFO] Finished at: 2023-02-26T10:55:26+03:00
+[INFO] ------------------------------------------------------------------------</li>
+        </ul>
+    </li>
+    <li>Run 2 tests from CartTest class
+        <ul>
+            <li><b>Command:</b> "mvn -Dtest=CartTest#checkProductsAreAddedToCart+checkRemoveProductsFromCart test"</li>
+            <li><b>Output:</b> [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.855 s - in CartTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.906 s
+[INFO] Finished at: 2023-02-26T11:02:45+03:00
+[INFO] ------------------------------------------------------------------------</li>
+        </ul>
+    </li>
+    <li>Run 1 test with parameter set in command
+        <ul>
+            <li><b>Command:</b> "mvn clean test -Dtest=CheckOutTest#checkCheckoutFormWithValidData -Dproduct="Sauce Labs Onesie""</li>
+            <li><b>Output:</b> [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.912 s - in CheckOutTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.477 s
+[INFO] Finished at: 2023-02-26T11:37:56+03:00
+[INFO] ------------------------------------------------------------------------</li>
+        </ul>
+    </li>
+</ol>
+
 <h2>Check-list</h2>
 
 <h3>Login</h3>

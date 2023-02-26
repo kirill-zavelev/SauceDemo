@@ -12,7 +12,7 @@ public class CheckOutTest extends BaseTest {
 
     @Test
     public void checkCheckoutFormWithValidData() {
-        final String product = "Sauce Labs Onesie";
+        final String product = System.getProperty("product");
         final String expectedTitle = "CHECKOUT: OVERVIEW";
         CheckOutYourInformationPage checkOutYourInformationPage = new LoginPage(getDriver())
                 .loginAsStandardUser()
