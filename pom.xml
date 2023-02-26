@@ -7,6 +7,15 @@
     <groupId>org.example</groupId>
     <artifactId>SauceDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <testng.version>7.7.1</testng.version>
+        <selenium.version>4.8.0</selenium.version>
+        <webdrivermanager.version>5.3.2</webdrivermanager.version>
+        <assertj.version>3.24.2</assertj.version>
+    </properties>
     <build>
         <pluginManagement>
             <plugins>
@@ -18,15 +27,6 @@
             </plugins>
         </pluginManagement>
     </build>
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <testng.version>7.7.1</testng.version>
-        <selenium.version>4.8.0</selenium.version>
-        <webdrivermanager.version>5.3.2</webdrivermanager.version>
-        <assertj.version>3.24.2</assertj.version>
-    </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
