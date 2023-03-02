@@ -1,7 +1,11 @@
-package com.saucedemo.page;
+package com.saucedemo;
 
+import com.saucedemo.util.PropertiesLoader;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import java.util.Properties;
 
 public class LoginPage extends BasePage {
 
@@ -10,23 +14,27 @@ public class LoginPage extends BasePage {
     private final By LOGIN_BUTTON = By.id("login-button");
     private final By ERROR = By.xpath("//h3[@data-test='error']");
 
-    private static final String STANDARD_USER = "standard_user";
-    private static final String STANDARD_PASSWORD = "secret_sauce";
+//    private static final String STANDARD_USER = PropertiesLoader.loadProperties().getProperty("standard.username");
+//    private static final String STANDARD_PASSWORD = PropertiesLoader.loadProperties().getProperty("standard.password");
+
+    private Properties properties;
 
     public LoginPage(WebDriver driver) {
         super(driver);
+        properties = PropertiesLoader.loadProperties();
     }
 
     public LoginPage open() {
-        driver.get("https://www.saucedemo.com/");
+        driver.get(properties.getProperty("base.url"));
         return this;
     }
 
     public ProductsPage loginAsStandardUser() {
-        loginAs(STANDARD_USER, STANDARD_PASSWORD);
+        loginAs(properties.getProperty("standard.username"), properties.getProperty("standard.password"));
         return new ProductsPage(driver);
     }
 
+    @Step("Login with username: {userName} and password: {password}")
     public void loginAs(String userName, String password) {
         driver.findElement(USER_NAME).sendKeys(userName);
         driver.findElement(PASSWORD).sendKeys(password);

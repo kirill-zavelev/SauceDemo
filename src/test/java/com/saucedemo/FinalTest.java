@@ -1,17 +1,18 @@
-import com.saucedemo.page.CheckOutOverviewPage;
-import com.saucedemo.page.CheckOutYourInformationPage;
-import com.saucedemo.page.LoginPage;
-import com.saucedemo.page.ThankYouPage;
+package com.saucedemo;
+
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 public class FinalTest extends BaseTest {
 
     @Test
+    @Severity(SeverityLevel.MINOR)
     public void checkThankYouPageAndReturnBackHome() {
         final String product = "Sauce Labs Onesie";
-        final String expectedThankYouPageMessage = "THANK YOU FOR YOUR ORDER";
-        final String expectedTitleAtProductsPage = "PRODUCTS";
+        final String expectedThankYouPageMessage = "Thank you for your order!";
+        final String expectedTitleAtProductsPage = "Products";
         CheckOutYourInformationPage checkOutYourInformationPage = new LoginPage(getDriver())
                 .loginAsStandardUser()
                 .addProductToCart(product)

@@ -1,4 +1,4 @@
-package com.saucedemo.page;
+package com.saucedemo;
 
 public enum ProductsSortOption {
 
