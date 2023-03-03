@@ -1,6 +1,6 @@
 package com.saucedemo.util.testng;
 
-import com.saucedemo.util.allure.AllureUtils;
+import com.saucedemo.util.allure.AllureUtil;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -43,12 +43,12 @@ public class TestListener implements ITestListener {
         try {
             WebDriver driver = (WebDriver) context.getAttribute("driver");
             if (driver != null) {
-                return AllureUtils.takeScreenshot(driver);
+                return AllureUtil.takeScreenshot(driver);
             } else {
-                return new byte[] {};
+                return new byte[]{};
             }
         } catch (NoSuchSessionException | IllegalStateException ex) {
-            return new byte[] {};
+            return new byte[]{};
         }
     }
 }

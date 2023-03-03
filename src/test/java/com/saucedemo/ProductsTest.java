@@ -1,5 +1,6 @@
 package com.saucedemo;
 
+import com.saucedemo.util.ProductsSortOption;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.assertj.core.api.Assertions;

@@ -1,5 +1,6 @@
 package com.saucedemo;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,6 +17,7 @@ public class CheckOutYourInformationPage extends BasePage {
         super(driver);
     }
 
+    @Step("Fill form with first name: {firstName}, last name: {lastName}, postal code: {postalCode}")
     public CheckOutYourInformationPage fillCheckoutForm(String firstName, String lastName, String postalCode) {
         driver.findElement(FIRST_NAME).sendKeys(firstName);
         driver.findElement(LAST_NAME).sendKeys(lastName);
