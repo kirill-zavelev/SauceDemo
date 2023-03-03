@@ -14,9 +14,6 @@ public class LoginPage extends BasePage {
     private final By LOGIN_BUTTON = By.id("login-button");
     private final By ERROR = By.xpath("//h3[@data-test='error']");
 
-//    private static final String STANDARD_USER = PropertiesLoader.loadProperties().getProperty("standard.username");
-//    private static final String STANDARD_PASSWORD = PropertiesLoader.loadProperties().getProperty("standard.password");
-
     private Properties properties;
 
     public LoginPage(WebDriver driver) {
