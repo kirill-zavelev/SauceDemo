@@ -1,9 +1,9 @@
-import com.saucedemo.page.CartPage;
-import com.saucedemo.page.CheckOutOverviewPage;
-import com.saucedemo.page.CheckOutYourInformationPage;
-import com.saucedemo.page.LoginPage;
+package com.saucedemo;
+
+import com.saucedemo.util.DataProviders;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.assertj.core.api.Assertions;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -11,9 +11,10 @@ import java.util.List;
 public class CheckOutTest extends BaseTest {
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     public void checkCheckoutFormWithValidData() {
         String product = getProductOrDefault(System.getProperty("product"));
-        final String expectedTitle = "CHECKOUT: OVERVIEW";
+        final String expectedTitle = "Checkout: Overview";
         CheckOutYourInformationPage checkOutYourInformationPage = new LoginPage(getDriver())
                 .loginAsStandardUser()
                 .addProductToCart(product)
@@ -28,7 +29,8 @@ public class CheckOutTest extends BaseTest {
                 .as("Title text should be " + expectedTitle);
     }
 
-    @Test(dataProvider = "dataProviderForCheckOutForm")
+    @Test(dataProviderClass = DataProviders.class, dataProvider = "dataProviderForCheckOutForm")
+    @Severity(SeverityLevel.MINOR)
     public void checkCheckoutFormWithInvalidData(String firstName, String lastName, String postalCode,
                                                  String errorMessage) {
         final String product = "Sauce Labs Onesie";
@@ -46,9 +48,10 @@ public class CheckOutTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.MINOR)
     public void checkReturnToCartPage() {
         final String product = "Sauce Labs Onesie";
-        final String expectedTitle = "YOUR CART";
+        final String expectedTitle = "Your Cart";
         String actualTitle = new LoginPage(getDriver())
                 .loginAsStandardUser()
                 .addProductToCart(product)
@@ -62,9 +65,10 @@ public class CheckOutTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.MINOR)
     public void checkReturnToProductsPage() {
         final String product = "Sauce Labs Onesie";
-        final String expectedTitle = "PRODUCTS";
+        final String expectedTitle = "Products";
         CheckOutYourInformationPage checkOutYourInformationPage = new LoginPage(getDriver())
                 .loginAsStandardUser()
                 .addProductToCart(product)
@@ -79,6 +83,7 @@ public class CheckOutTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     public void checkAddedProductsAreDisplayedInCheckout() {
         final List<String> products = List.of("Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt");
         CartPage cartPage = new LoginPage(getDriver())
@@ -99,15 +104,6 @@ public class CheckOutTest extends BaseTest {
         Assertions.assertThat(actualProductsNames)
                 .as("Names should be " + expectedProductsNames)
                 .isEqualTo(expectedProductsNames);
-    }
-
-    @DataProvider(name = "dataProviderForCheckOutForm")
-    private Object[][] dataProviderForCheckOutForm() {
-        return new Object[][]{
-                {"", "SomeLastName", "12345", "Error: First Name is required"},
-                {"SomeFirstName", "", "12345", "Error: Last Name is required"},
-                {"SomeFirstName", "SomeLastName", "", "Error: Postal Code is required"}
-        };
     }
 
     private String getProductOrDefault(String product) {

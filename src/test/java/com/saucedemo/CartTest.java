@@ -1,6 +1,8 @@
-import com.saucedemo.page.CartPage;
-import com.saucedemo.page.LoginPage;
-import com.saucedemo.page.ProductsPage;
+package com.saucedemo;
+
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -15,6 +17,8 @@ public class CartTest extends BaseTest {
 
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test checks that Product is added to the Cart and validates it's name and price")
     public void checkProductIsAddedToCart() {
         final String productName = "Sauce Labs Backpack";
         String expectedProductPrice = new LoginPage(getDriver())
@@ -29,6 +33,8 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test checks that Products are added to the Cart and validates their prices")
     public void checkProductsAreAddedToCart() {
         List<String> expectedProductsPrices = new LoginPage(getDriver())
                 .loginAsStandardUser()
@@ -42,6 +48,8 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test checks that Products are removed from the Cart")
     public void checkRemoveProductsFromCart() {
         final List<String> expectedProductsAfterRemove = List.of("Sauce Labs Bolt T-Shirt",
                 "Sauce Labs Fleece Jacket");
@@ -58,6 +66,8 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.MINOR)
+    @Description("Test checks that 'Continue Shopping' button leads to Products Page")
     public void checkContinueShopping() {
         List<WebElement> productsAtProductsPage = new LoginPage(getDriver())
                 .loginAsStandardUser()

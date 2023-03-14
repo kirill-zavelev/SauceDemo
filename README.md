@@ -42,10 +42,10 @@
 [INFO] ------------------------------------------------------------------------</li>
         </ul>
     </li>
-    <li>Run 2 tests from CartTest class
+    <li>Run 2 tests from com.saucedemo.CartTest class
         <ul>
-            <li><b>Command:</b> "mvn -Dtest=CartTest#checkProductsAreAddedToCart+checkRemoveProductsFromCart test"</li>
-            <li><b>Output:</b> [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.855 s - in CartTest
+            <li><b>Command:</b> "mvn -Dtest=com.saucedemo.CartTest#checkProductsAreAddedToCart+checkRemoveProductsFromCart test"</li>
+            <li><b>Output:</b> [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.855 s - in com.saucedemo.CartTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -61,8 +61,8 @@
     </li>
     <li>Run 1 test with parameter set in command
         <ul>
-            <li><b>Command:</b> "mvn clean test -Dtest=CheckOutTest#checkCheckoutFormWithValidData -Dproduct="Sauce Labs Onesie""</li>
-            <li><b>Output:</b> [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.912 s - in CheckOutTest
+            <li><b>Command:</b> "mvn clean test -Dtest=com.saucedemo.CheckOutTest#checkCheckoutFormWithValidData -Dproduct="Sauce Labs Onesie""</li>
+            <li><b>Output:</b> [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.912 s - in com.saucedemo.CheckOutTest
 [INFO]
 [INFO] Results:
 [INFO]

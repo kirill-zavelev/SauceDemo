@@ -1,6 +1,8 @@
-import com.saucedemo.page.LoginPage;
-import com.saucedemo.page.ProductsPage;
-import com.saucedemo.page.ProductsSortOption;
+package com.saucedemo;
+
+import com.saucedemo.util.ProductsSortOption;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -11,6 +13,7 @@ import java.util.List;
 public class ProductsTest extends BaseTest {
 
     @Test
+    @Severity(SeverityLevel.MINOR)
     public void checkThatCartIconDisplayAmountOfAddedProducts() {
         ProductsPage productsPage = new LoginPage(getDriver())
                 .loginAsStandardUser()
@@ -22,6 +25,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.MINOR)
     public void checkProductsSorting() {
         List<String> actualSortedProducts = new LoginPage(getDriver())
                 .loginAsStandardUser()
