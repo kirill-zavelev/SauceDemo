@@ -3,6 +3,7 @@ package com.saucedemo;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -21,13 +22,15 @@ public class CartTest extends BaseTest {
     @Description("Test checks that Product is added to the Cart and validates it's name and price")
     public void checkProductIsAddedToCart() {
         final String productName = "Sauce Labs Backpack";
+        String testProduct = System.getProperty("PRODUCT");
+        testProduct = StringUtils.isEmpty(testProduct) ? productName : testProduct;
         String expectedProductPrice = new LoginPage(getDriver())
                 .loginAsStandardUser()
-                .getProductPrice(productName);
+                .getProductPrice(testProduct);
         CartPage cartPage = new ProductsPage(getDriver())
-                .addProductToCart(productName)
+                .addProductToCart(testProduct)
                 .openProductCart();
-        Assertions.assertThat(cartPage.getProductPrice(productName))
+        Assertions.assertThat(cartPage.getProductPrice(testProduct))
                 .as("Price should be " + expectedProductPrice)
                 .isEqualTo(expectedProductPrice);
     }
