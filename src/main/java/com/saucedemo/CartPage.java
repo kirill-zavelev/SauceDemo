@@ -1,5 +1,6 @@
 package com.saucedemo;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j2
 public class CartPage extends BasePage {
 
     private final By INVENTORY_ITEM_NAME_ELEMENT = By.xpath("//div[@class='inventory_item_name']");
@@ -24,7 +26,9 @@ public class CartPage extends BasePage {
     }
 
     public String getProductPrice(String productName) {
-        return driver.findElement(By.xpath(String.format(CART_ITEM_PRICE_ELEMENT, productName))).getText();
+        String productPrice = driver.findElement(By.xpath(String.format(CART_ITEM_PRICE_ELEMENT, productName))).getText();
+        log.info("Product: {} has the following price: {}", productName, productPrice);
+        return productPrice;
     }
 
     public List<String> getProductsPrices(List<String> products) {
@@ -38,12 +42,14 @@ public class CartPage extends BasePage {
                 }
             }
         }
+        log.info("Products: {} have prices: {}", products, prices);
         return prices;
     }
 
     public CartPage removeProductFromCart(String productName) {
         By fullLocator = By.xpath(String.format(REMOVE_BTN_ELEMENT, productName));
         driver.findElement(fullLocator).click();
+        log.info("Product {} was deleted", productName);
         return this;
     }
 
