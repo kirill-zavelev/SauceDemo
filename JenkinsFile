@@ -13,28 +13,26 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                 {
-                    // Get some code from a GitHub repository
-                    git branch: "${params.BRANCH}", url: 'https://github.com/kirill-zavelev/SauceDemo.git'
+                // Get some code from a GitHub repository
+                git branch: "${params.BRANCH}", url: 'https://github.com/kirill-zavelev/SauceDemo.git'
 
 
-                    // Run Maven on a Unix agent.
-                    // sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                // Run Maven on a Unix agent.
+                // sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
-                    // To run Maven on a Windows agent, use
-                    bat "mvn clean test -DsuiteXmlFile=src/test/resources/testng.xml"
-                }
+                // To run Maven on a Windows agent, use
+                bat "mvn clean test -DsuiteXmlFile=src/test/resources/testng.xml"
             }
         }
         stage('Reports') {
             steps {
                 script {
                     allure([
-                        includeProperties: false,
-                        jdk: '',
-                        properties: [],
-                        reportBuildPolicy: 'ALWAYS',
-                        results: [[path: 'target/allure-results']]
+                            includeProperties: false,
+                            jdk              : '',
+                            properties       : [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results          : [[path: 'target/allure-results']]
                     ])
                 }
             }
