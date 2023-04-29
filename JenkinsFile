@@ -17,8 +17,8 @@ pipeline {
                 // Get some code from a GitHub repository
                 git branch: "${params.BRANCH}", url: 'https://github.com/kirill-zavelev/SauceDemo.git'
 
-                // To run Maven on a Windows agent, use
-                bat "mvn clean test -DsuiteXmlFile=${params.TEST_NG_XML}"
+                // To run Maven on a Unix agent, use
+                sh "mvn clean test -DsuiteXmlFile=${params.TEST_NG_XML}"
             }
         }
         stage('Reports') {
