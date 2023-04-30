@@ -12,7 +12,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <testng.version>7.7.1</testng.version>
-        <selenium.version>4.8.0</selenium.version>
+        <selenium.version>4.8.1</selenium.version>
         <webdrivermanager.version>5.3.2</webdrivermanager.version>
         <assertj.version>3.24.2</assertj.version>
         <allure.version>2.12.0</allure.version>
@@ -20,6 +20,9 @@
         <aspectj.version>1.9.19</aspectj.version>
         <allure-testng.version>2.21.0</allure-testng.version>
         <apache.commons-lang3.version>3.12.0</apache.commons-lang3.version>
+        <lombok.version>1.18.26</lombok.version>
+        <dataformat.yaml.version>2.12.3</dataformat.yaml.version>
+        <log4j-core.version>2.20.0</log4j-core.version>
 
         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
     </properties>
@@ -96,6 +99,25 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${apache.commons-lang3.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>${dataformat.yaml.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-core.version}</version>
         </dependency>
     </dependencies>
 </project>

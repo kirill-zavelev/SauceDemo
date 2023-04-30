@@ -1,6 +1,7 @@
 package com.saucedemo;
 
 import com.saucedemo.util.ProductsSortOption;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Log4j2
 public class ProductsPage extends BasePage {
 
     private final By SHOPPING_CART_BTN_ELEMENT = By.xpath("//a[@class='shopping_cart_link']");
@@ -32,7 +34,9 @@ public class ProductsPage extends BasePage {
 
     public String getProductPrice(String productName) {
         By fullLocator = By.xpath(String.format(ITEM_PRICE_ELEMENT, productName));
-        return driver.findElement(fullLocator).getText();
+        String productPrice = driver.findElement(fullLocator).getText();
+        log.info("Product: {} has the following price: {}", productName, productPrice);
+        return productPrice;
     }
 
     public List<String> getProductsPrices(List<String> products) {
@@ -45,6 +49,7 @@ public class ProductsPage extends BasePage {
                 }
             }
         }
+        log.info("Products: {} have prices: {}", products, prices);
         return prices;
     }
 
@@ -62,6 +67,7 @@ public class ProductsPage extends BasePage {
     public ProductsPage addProductToCart(String productName) {
         By fullLocator = By.xpath(String.format(ADD_TO_CART_BTN_ELEMENT, productName));
         driver.findElement(fullLocator).click();
+        log.info("Product: {} was added to Cart", productName);
         return this;
     }
 
@@ -75,6 +81,7 @@ public class ProductsPage extends BasePage {
             }
         }
         driver.findElement(SHOPPING_CART_BTN_ELEMENT).click();
+        log.info("Products: {} were added to Cart", productsToAdd);
         return this;
     }
 
@@ -105,6 +112,7 @@ public class ProductsPage extends BasePage {
     public List<String> sortProductsNamesAndGetList(ProductsSortOption sortOption) {
         Select select = new Select(driver.findElement(SORT_DROPDOWN));
         select.selectByVisibleText(sortOption.getOption());
+        log.info("Sorted option: {} was selected", sortOption);
         return driver.findElements(INVENTORY_ITEM_NAMES).stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
